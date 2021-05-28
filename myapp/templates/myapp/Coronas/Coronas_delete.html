@@ -1,0 +1,56 @@
+{% extends 'myapp/base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page %}
+<li class="nav-item">
+ 
+  <a class="nav-link show" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-dollar-sign"></i>
+    <span>Precios</span>
+  </a>
+  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <h6 class="collapse-header">Precios:</h6>
+      <a class="collapse-item " href="{% url 'myapp:Flores_list' %}">Flores</a>
+      <a class="collapse-item active" href="{% url 'myapp:Coronas_list' %}">Coronas</a>
+      <a class="collapse-item "  href="{% url 'myapp:Construccion_list' %}">Construcción</a>
+      <a class="collapse-item"  href="{% url 'myapp:Transporte_list' %}">Transporte</a>
+      <a class="collapse-item "  href="{% url 'myapp:Agricultura_list' %}">Agricultura</a>
+      <a class="collapse-item "  href="{% url 'myapp:Cerdo_list' %}">Cerdo</a>
+       <a class="collapse-item "  href="{% url 'myapp:Topado_list' %}">Topado</a>
+    </div>
+  </div>
+  
+</li>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header"><h4>Eliminar Precio</h4></div>
+            <div class="card-body">
+
+                <form method="post">{% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            Está seguro de que desea eliminar el Precio de "{{ object }}" ?
+                        </div>
+                    </div>
+                     <div class="row mt-2">
+                        <div class="col">
+                            <input class="btn btn-outline-danger" type="submit" value="Eliminar"/>
+                            <a href="{% url 'myapp:Coronas_list'%}" class="btn btn-outline-secondary" role="button"
+                               aria-pressed="true">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+Copyright © 2020 Ela Admin
+{% endblock %}

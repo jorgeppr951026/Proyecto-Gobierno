@@ -1,0 +1,94 @@
+{% extends 'myapp/base.html'%}
+{% load static %}
+
+
+{% block page %}
+<li class="nav-item">
+ 
+  <a class="nav-link show" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-dollar-sign"></i>
+    <span>Precios</span>
+  </a>
+  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Precios:</h6>
+        <a class="collapse-item " href="{% url 'myapp:Flores_list' %}">Flores</a>
+        <a class="collapse-item" href="{% url 'myapp:Coronas_list' %}">Coronas</a>
+        <a class="collapse-item"  href="{% url 'myapp:Construccion_list' %}">Construcción</a>
+        <a class="collapse-item"  href="{% url 'myapp:Transporte_list' %}">Transporte</a>
+        <a class="collapse-item "  href="{% url 'myapp:Agricultura_list' %}">Agricultura</a>
+        <a class="collapse-item active"  href="{% url 'myapp:Cerdo_list' %}">Cerdo</a>
+         <a class="collapse-item "  href="{% url 'myapp:Topado_list' %}">Topado</a>
+    </div>
+  </div>
+  
+</li>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800 font-weight-bold text-primary">Precios del cerdo</h1>
+    <a href="{% url 'myapp:Cerdo_create'%}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-plus fa-sm text-white-50"></i> Añadir Precio a Cerdo </a>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Topado por</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Producto</th>
+                        <th>precio</th>
+                        <th>Topado por</th>
+                        <th>Opciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for instance in object_list %}
+                    <tr>
+                        <td>{{instance.producto}}</td>
+                        <td>{{instance.precio}}</td>
+                        <td>{{instance.topado_por}}</td>
+             
+                       
+                        <td>
+                            <!--
+                            <a href="{% url 'myapp:Cerdo_details' instance.id %}"
+                                class="btn btn-primary btn-circle btn-sm">
+                                <i class="fas fa-info"></i>
+                            </a>
+                            -->
+                            <a href="{% url 'myapp:Cerdo_update' instance.id %}"
+                                class="btn btn-success btn-circle btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{% url 'myapp:Cerdo_delete' instance.id %}"
+                                class="btn btn-danger btn-circle btn-sm">
+                                <i class="fas fa-trash"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

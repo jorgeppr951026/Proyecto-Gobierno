@@ -1,0 +1,52 @@
+{% extends 'myapp/base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block page %}
+<li class="nav-item">
+ 
+  <a class="nav-link show" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-dollar-sign"></i>
+    <span>Precios</span>
+  </a>
+  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <h6 class="collapse-header">Precios:</h6>
+      <a class="collapse-item " href="{% url 'myapp:Flores_list' %}">Flores</a>
+      <a class="collapse-item" href="{% url 'myapp:Coronas_list' %}">Coronas</a>
+      <a class="collapse-item"  href="{% url 'myapp:Construccion_list' %}">Construcción</a>
+      <a class="collapse-item"  href="{% url 'myapp:Transporte_list' %}">Transporte</a>
+      <a class="collapse-item "  href="{% url 'myapp:Agricultura_list' %}">Agricultura</a>
+      <a class="collapse-item "  href="{% url 'myapp:Cerdo_list' %}">Cerdo</a>
+      <a class="collapse-item active"  href="{% url 'myapp:Topado_list' %}">Topado</a>
+    </div>
+  </div>
+  
+</li>
+{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header"><h4>Crear Precio</h4></div>
+            <div class="card-body">
+
+                <form method="post">{% csrf_token %}
+
+                  <div class="row">
+                    <div class="col-4"> {{ form.name|as_crispy_field }} </div>
+                  </div>
+                 
+                 
+                    
+                  <input class="btn btn-outline-success" type="submit" value="Crear"/>
+                    <a href="{% url 'myapp:Topado_list'%}" class="btn btn-outline-secondary" role="button"
+                       aria-pressed="true">Cancelar</a>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+

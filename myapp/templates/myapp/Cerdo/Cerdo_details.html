@@ -1,0 +1,60 @@
+{% extends 'myapp/base.html'%}
+{% load static %}
+{% block page %}
+<li class="nav-item">
+ 
+  <a class="nav-link show" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-dollar-sign"></i>
+    <span>Precios</span>
+  </a>
+  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Precios:</h6>
+        <a class="collapse-item " href="{% url 'myapp:Flores_list' %}">Flores</a>
+        <a class="collapse-item" href="{% url 'myapp:Coronas_list' %}">Coronas</a>
+        <a class="collapse-item"  href="{% url 'myapp:Construccion_list' %}">Construcción</a>
+        <a class="collapse-item"  href="{% url 'myapp:Transporte_list' %}">Transporte</a>
+        <a class="collapse-item "  href="{% url 'myapp:Agricultura_list' %}">Agricultura</a>
+        <a class="collapse-item active"  href="{% url 'myapp:Cerdo_list' %}">Cerdo</a>
+         <a class="collapse-item "  href="{% url 'myapp:Topado_list' %}">Topado</a>
+    </div>
+  </div>
+  
+</li>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <strong>Detalles de Cerdo </strong>
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        Nombre: {{object.Nombre_del_Destino}}<br/>
+                        Active: {{ object.activo }}
+                       
+                    </div>
+
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <a href="{% url 'myapp:Cerdo_list'%}" class="btn btn-outline-secondary" role="button"
+                           aria-pressed="true">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+Copyright © 2020 Ela Admin
+{% endblock %}
+
+
