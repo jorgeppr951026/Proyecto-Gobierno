@@ -98,7 +98,9 @@ class Cerdo(models.Model):
     
     class Meta:
         unique_together = (('producto', 'topado_por'),)
-        
+    
+    
+
     def __str__(self):
         return self.producto
 
