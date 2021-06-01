@@ -20,6 +20,7 @@ urlpatterns = [
     #path('get_Agricultura/<str:topado_por>', views.Agricultura1List.as_view() , name='get_Agricultura-'),
     #path('get_Cerdo/<str:topado_por>', views.Cerdo1List.as_view() , name='get_Cerdo-'),
     path('get/<str:municipio>', views.GetMunicipio.as_view() , name='get'),
+    path('last_update', views.GetLastUpdate.as_view(), name='last_update')
   
 
 ]

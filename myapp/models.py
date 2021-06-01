@@ -1,12 +1,13 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 
+from simple_history.models import HistoricalRecords
 # Create your models here.
 
 
 class Topado(models.Model):
     name = models.CharField(max_length=200)
-
+    history = HistoricalRecords()
     def __str__(self):
         return self.name
 
@@ -20,7 +21,7 @@ class Flores(models.Model):
     precio_2 = models.DecimalField(max_digits=10, decimal_places=2)
     precio_3 = models.DecimalField(max_digits=10, decimal_places=2)
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
-    
+    history = HistoricalRecords()
     class Meta:
         unique_together = (('descripcion', 'topado_por','um' ),)
 
@@ -35,7 +36,7 @@ class Coronas(models.Model):
     um = models.CharField(max_length=200)
     precio_minorista =  models.DecimalField(max_digits=10, decimal_places=2)
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
-
+    history = HistoricalRecords()
     class Meta:
         unique_together = (('variedades_de_flores', 'topado_por'),)
     
@@ -48,7 +49,7 @@ class Construccion(models.Model):
     um = models.CharField(max_length=200)
     precio_venta = models.DecimalField(max_digits=10, decimal_places=2)
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
-
+    history = HistoricalRecords()
     class Meta:
         unique_together = (('producto', 'topado_por'),)
     
@@ -68,7 +69,7 @@ class Transporte(models.Model):
     camioneta = models.IntegerField(default=0)
     camino = models.IntegerField(default=0,verbose_name="Camión")
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
-
+    history = HistoricalRecords()
     class Meta:
         unique_together = (('tramo', 'topado_por','municipio'),)
    
@@ -84,7 +85,7 @@ class Agricultura(models.Model):
     venta_mayorista = models.DecimalField(max_digits=10, decimal_places=2) 
     venta_minorista = models.DecimalField(max_digits=10, decimal_places=2)
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
-    
+    history = HistoricalRecords()
     class Meta:
         unique_together = (('producto', 'topado_por'),)
 
@@ -95,7 +96,7 @@ class Cerdo(models.Model):
     producto = models.CharField(max_length=200)
     precio =  models.DecimalField(max_digits=10, decimal_places=2)
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
-    
+    history = HistoricalRecords()
     class Meta:
         unique_together = (('producto', 'topado_por'),)
     

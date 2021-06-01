@@ -5,6 +5,39 @@ from myapp.models import *
 from .serializers import *
 from django.db.models import Count
 
+class GetLastUpdate(APIView):
+    def get(self, request):
+        updates = []
+
+        if Flores.history.first():
+            flores_update = Flores.history.first().history_date
+            updates.append(flores_update)
+
+        if Coronas.history.first():
+            corona_update = Coronas.history.first().history_date
+            updates.append(corona_update)
+
+        if Construccion.history.first():
+            construccion_update = Construccion.history.first().history_date
+            updates.append(construccion_update)
+        if Agricultura.history.first():
+            agricultura_update = Agricultura.history.first().history_date
+            updates.append(agricultura_update)
+        if Cerdo.history.first():
+            cerdo_update = Cerdo.history.first().history_date
+            updates.append(cerdo_update)
+        if Transporte.history.first():
+            trasporte_update = Transporte.history.first().history_date
+            updates.append(trasporte_update)
+
+        updates.sort(reverse=True)  
+        if updates[0]:
+            last_update = updates[0]
+            return Response({'last_update': last_update})
+        
+        return Response({'menssage': "No hay datos en la base de datos"})
+
+
 
 class GetMunicipio(APIView):
     def get(self, request, **kwargs):
@@ -17,8 +50,11 @@ class GetMunicipio(APIView):
         cerdo = Cerdo.objects.all()
         tranporte = Transporte.objects.all()
 
-        dicc = {}
 
+
+
+        dicc = {}
+     
         obj_flores = []
         obj_coronas = []
         obj_construccion = []
@@ -28,6 +64,8 @@ class GetMunicipio(APIView):
     #Flores
         for flor in flores:
             existe = False
+          
+
             flor_name = flor.descripcion + ' ' + flor.um 
             for element in obj_flores : 
                 if flor_name == element['name']:

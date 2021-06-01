@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'myapp',
     'apiapp',
     'rest_framework',
+    'simple_history',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,7 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'gobierno.urls'
