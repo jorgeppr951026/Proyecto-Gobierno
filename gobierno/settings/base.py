@@ -60,7 +60,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
+     'http://localhost:3000',
+     'http://localhost:8100'
 ]
 
 ROOT_URLCONF = 'gobierno.urls'
