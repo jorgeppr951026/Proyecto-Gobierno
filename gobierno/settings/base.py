@@ -24,9 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4(z=h81$b+&37vm8mpms&^=cw836p((f%d661b0=jd((b4r_ku'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -83,24 +82,9 @@ WSGI_APPLICATION = 'gobierno.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-  'default': {
-        #'#ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
-        #'ENGINE': 'django.db.backends.mysql',
-        #'ENGINE': 'django.db.backends.oracle',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gobierno2',
-        'USER': 'openpg',
-        'PASSWORD': 'openpgpwd',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
 
-import dj_database_url
 
-#DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -140,16 +124,8 @@ LOGIN_REDIRECT_URL = 'myapp:Flores_list'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
 
