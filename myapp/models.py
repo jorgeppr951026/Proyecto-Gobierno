@@ -6,7 +6,7 @@ from simple_history.models import HistoricalRecords
 
 
 class Topado(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     history = HistoricalRecords()
     def __str__(self):
         return self.name
