@@ -2,13 +2,7 @@ from .base import *
 import django_heroku
 
 DEBUG = True
-
-
-
 ALLOWED_HOSTS = ['*']
-
-
-
 DATABASES = {
   'default': {
         #'#ENGINE': 'django.db.backends.sqlite3',
@@ -24,9 +18,7 @@ DATABASES = {
     }
 }
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 #Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (

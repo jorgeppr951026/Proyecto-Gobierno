@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'simple_history',
     'crispy_forms',
-    #'corsheaders',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,12 +77,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gobierno.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-
 
 
 # Password validation
