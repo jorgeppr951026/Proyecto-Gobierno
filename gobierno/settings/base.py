@@ -29,13 +29,7 @@ SECRET_KEY = '4(z=h81$b+&37vm8mpms&^=cw836p((f%d661b0=jd((b4r_ku'
 
 # Application definition
 
-INSTALLED_APPS = [
-    'myapp',
-    'apiapp',
-    'rest_framework',
-    'simple_history',
-    'crispy_forms',
-    'corsheaders',
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +37,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+
+MY_APPS = [
+    'myapp',
+    'apiapp',
+   
+]
+
+THIRS_APPS=[
+    'rest_framework',
+    'simple_history',
+    'crispy_forms',
+    'corsheaders',
+    'import_export',
+]
+
+INSTALLED_APPS = DJANGO_APPS + MY_APPS + THIRS_APPS
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
