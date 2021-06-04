@@ -57,7 +57,7 @@ class TopadoResource(resources.ModelResource):
 class TopadoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
     resource_class = TopadoResource
 
-
+###########################
 admin.site.register(Flores, FloresAdmin)
 admin.site.register(Coronas, CoronasAdmin)
 admin.site.register(Construccion, ConstruccionAdmin)
