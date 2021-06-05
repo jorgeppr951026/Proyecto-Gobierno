@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from myapp.models import *
 from .serializers import *
 from django.db.models import Count
-
+import unicodedata
 class GetLastUpdate(APIView):
     def get(self, request):
         updates = []
@@ -41,8 +41,13 @@ class GetLastUpdate(APIView):
 
 class GetMunicipio(APIView):
     def get(self, request, **kwargs):
-        municipio = kwargs['municipio']
+        municipio= kwargs['municipio']
 
+        municipio = unicodedata.normalize('NFKD', municipio).encode('ASCII', 'ignore').decode().lower().replace(' ','')
+
+       
+        #unicodedata.normalize('NFKD', element['Municipio']).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio
+   
         flores = Flores.objects.all()
         coronas = Coronas.objects.all()
         construccions = Construccion.objects.all()
@@ -64,7 +69,8 @@ class GetMunicipio(APIView):
     #Flores
         for flor in flores:
             existe = False
-          
+
+           
 
             flor_name = flor.descripcion + ' ' + flor.um 
             for element in obj_flores : 
@@ -79,13 +85,13 @@ class GetMunicipio(APIView):
                                 element['primera'] = flor.precio_1 
                                 element['segunda'] = flor.precio_2 
                                 element['tercera'] = flor.precio_3
-                        elif flor.topado_por.name == municipio or flor.topado_por.name == 'Nacional' or flor.topado_por.name == 'Provincial':
+                        elif unicodedata.normalize('NFKD', flor.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or flor.topado_por.name == 'Nacional' or flor.topado_por.name == 'Provincial':
                             element['topado_por'] = flor.topado_por.name
                             element['primera'] = flor.precio_1 
                             element['segunda'] = flor.precio_2 
                             element['tercera'] = flor.precio_3
 
-            if existe == False and ( flor.topado_por.name == municipio or flor.topado_por.name == 'Nacional' or flor.topado_por.name == 'Provincial' )  :
+            if existe == False and ( unicodedata.normalize('NFKD', flor.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or flor.topado_por.name == 'Nacional' or flor.topado_por.name == 'Provincial' )  :
                 obj_flores.append({
                     'name': flor.descripcion + ' ' + flor.um ,
                     'primera': flor.precio_1 ,
@@ -114,14 +120,14 @@ class GetMunicipio(APIView):
                                 element['diametro'] = corona.diametro_aro
                                 element['precio'] = corona.precio_minorista
                         
-                        elif corona.topado_por.name == municipio or corona.topado_por.name == 'Nacional' or corona.topado_por.name == 'Provincial'  :
+                        elif unicodedata.normalize('NFKD', corona.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or corona.topado_por.name == 'Nacional' or corona.topado_por.name == 'Provincial'  :
                             element['topado_por'] = corona.topado_por.name
                             element['cant_variedades_flores'] = corona.variedades_de_flores 
                             element['docenas'] = corona.cant_docenas 
                             element['diametro'] = corona.diametro_aro
                             element['precio'] = corona.precio_minorista
 
-            if existe == False and ( corona.topado_por.name == municipio or corona.topado_por.name == 'Nacional' or corona.topado_por.name == 'Provincial' )  :
+            if existe == False and ( unicodedata.normalize('NFKD', corona.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or corona.topado_por.name == 'Nacional' or corona.topado_por.name == 'Provincial' )  :
                 obj_coronas.append({
                     'cant_variedades_flores': corona.variedades_de_flores ,
                     'docenas': corona.cant_docenas ,
@@ -147,11 +153,11 @@ class GetMunicipio(APIView):
                                 element['topado_por'] = material.topado_por.name
                                 element['price'] = material.precio_venta 
                                 
-                        elif material.topado_por.name == municipio or material.topado_por.name == 'Nacional' or material.topado_por.name == 'Provincial':
+                        elif unicodedata.normalize('NFKD', material.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or material.topado_por.name == 'Nacional' or material.topado_por.name == 'Provincial':
                             element['topado_por'] = material.topado_por.name
                             element['price'] = material.precio_venta 
 
-            if existe == False and ( material.topado_por.name == municipio or material.topado_por.name == 'Nacional' or material.topado_por.name == 'Provincial' )  :
+            if existe == False and ( unicodedata.normalize('NFKD', material.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or material.topado_por.name == 'Nacional' or material.topado_por.name == 'Provincial' )  :
                 obj_construccion.append({
                     'name': material_name ,
                     'price': material.precio_venta ,
@@ -179,7 +185,7 @@ class GetMunicipio(APIView):
                                 element['diametro'] = producto.venta_mayorista
                                 element['precio'] = producto.venta_minorista
                         
-                        elif producto.topado_por.name == municipio or producto.topado_por.name == 'Nacional' or producto.topado_por.name == 'Provincial'  :
+                        elif unicodedata.normalize('NFKD', producto.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or producto.topado_por.name == 'Nacional' or producto.topado_por.name == 'Provincial'  :
                             element['topado_por'] = producto.topado_por.name
                             element['type'] = producto.tipo 
                             element['name'] = producto.producto 
@@ -187,7 +193,7 @@ class GetMunicipio(APIView):
                             element['venta_mayorista'] = producto.venta_mayorista
                             element['venta_minorista'] = producto.venta_minorista
             
-            if existe == False and ( producto.topado_por.name == municipio or producto.topado_por.name == 'Nacional' or producto.topado_por.name == 'Provincial' )  :
+            if existe == False and ( unicodedata.normalize('NFKD', producto.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or producto.topado_por.name == 'Nacional' or producto.topado_por.name == 'Provincial' )  :
                 obj_agricultura.append({
                     'type': producto.tipo ,
                     'name':  producto.producto ,
@@ -236,11 +242,11 @@ class GetMunicipio(APIView):
                                 element['topado_por'] = parte.topado_por.name
                                 element['price'] = parte.precio 
                                 
-                        elif parte.topado_por.name == municipio or parte.topado_por.name == 'Nacional' or parte.topado_por.name == 'Provincial':
+                        elif unicodedata.normalize('NFKD', parte.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or parte.topado_por.name == 'Nacional' or parte.topado_por.name == 'Provincial':
                             element['topado_por'] = parte.topado_por.name
                             element['price'] = parte.precio 
 
-            if existe == False and ( parte.topado_por.name == municipio or parte.topado_por.name == 'Nacional' or parte.topado_por.name == 'Provincial' )  :
+            if existe == False and ( unicodedata.normalize('NFKD', parte.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or parte.topado_por.name == 'Nacional' or parte.topado_por.name == 'Provincial' )  :
                 obj_cerdo.append({
                     'name': parte.producto ,
                     'price': parte.precio ,
@@ -257,10 +263,10 @@ class GetMunicipio(APIView):
             for element in obj_transporte : 
                 if tramo.tramo == element['name']:
                     existe =True
-                    if element['topado_por'] == 'Nacional' and element['Municipio'] == municipio:
+                    if element['topado_por'] == 'Nacional' and unicodedata.normalize('NFKD', element['Municipio']).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio:
                         break
                     else:
-                        if  element['topado_por']  == 'Provincial' and element['Municipio'] == municipio:
+                        if  element['topado_por']  == 'Provincial' and unicodedata.normalize('NFKD', element['Municipio']).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio:
                             if tramo.topado_por.name == 'Nacional':
                                 element['topado_por'] = tramo.topado_por.name
                                 element['Municipio'] = tramo.municipio
@@ -273,7 +279,7 @@ class GetMunicipio(APIView):
                                 element['camioneta'] = tramo.camioneta 
                                 element['camino'] = tramo.camino
                                                                 
-                        elif tramo.municipio == municipio and (tramo.topado_por.name == municipio or tramo.topado_por.name == 'Nacional' or tramo.topado_por.name == 'Provincial'):
+                        elif unicodedata.normalize('NFKD', tramo.municipio).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio and (unicodedata.normalize('NFKD', tramo.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or tramo.topado_por.name == 'Nacional' or tramo.topado_por.name == 'Provincial'):
                             element['topado_por'] = tramo.topado_por.name
                             element['Municipio'] = tramo.municipio
                             element['name'] = tramo.tramo 
@@ -284,8 +290,8 @@ class GetMunicipio(APIView):
                             element['panel_y_micro'] = tramo.panel_y_micro 
                             element['camioneta'] = tramo.camioneta 
                             element['camino'] = tramo.camino 
-
-            if existe == False and tramo.municipio == municipio and ( tramo.topado_por.name == municipio or tramo.topado_por.name == 'Nacional' or tramo.topado_por.name == 'Provincial' )  :
+            print()
+            if existe == False and unicodedata.normalize('NFKD', tramo.municipio).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio and ( unicodedata.normalize('NFKD', tramo.topado_por.name).encode('ASCII', 'ignore').decode().lower().replace(' ','') == municipio or tramo.topado_por.name == 'Nacional' or tramo.topado_por.name == 'Provincial' )  :
                 obj_transporte.append({
                     'Municipio': tramo.municipio,
                     'name': tramo.tramo ,

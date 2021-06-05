@@ -33,7 +33,7 @@ class Coronas(models.Model):
     variedades_de_flores = models.CharField(max_length=200)
     cant_docenas = models.CharField(max_length=200 , verbose_name="Cantidad de docenas")
     diametro_aro = models.CharField(max_length=200, verbose_name="Diámetro del aro")
-    um = models.CharField(max_length=200)
+    um = models.CharField(max_length=200, default='U')
     precio_minorista =  models.DecimalField(max_digits=10, decimal_places=2)
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
     history = HistoricalRecords()
@@ -46,7 +46,7 @@ class Coronas(models.Model):
 
 class Construccion(models.Model):
     producto = models.CharField(max_length=200)    
-    um = models.CharField(max_length=200)
+    um = models.CharField(max_length=200, default='U')
     precio_venta = models.DecimalField(max_digits=10, decimal_places=2)
     topado_por = models.ForeignKey(Topado,on_delete=CASCADE, default=None,)
     history = HistoricalRecords()
